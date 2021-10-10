@@ -1,0 +1,52 @@
+{
+  "name": "vue-inventory-barang",
+  "version": "1.0.0",
+  "description": "aplikasi inventory barang sederhana menggunakan stack mevn",
+  "main": "server/index.js",
+  "scripts": {
+    "server-start": "node server/index.js",
+    "server-dev": "nodemon server/index.js",
+    "client-dev": "webpack serve --mode=development --config ./webpack.config.js --open",
+    "client-build": "webpack --mode=production",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/febriadj/vue-inventory-barang.git"
+  },
+  "author": "febriadji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/febriadj/vue-inventory-barang/issues"
+  },
+  "homepage": "https://github.com/febriadj/vue-inventory-barang#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-vue": "^7.19.1",
+    "nodemon": "^2.0.13",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "dependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "concurrently": "^6.3.0",
+    "core-js": "^3.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.6.1",
+    "mocha": "^9.1.2",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.2"
+  }
+}
