@@ -15,11 +15,15 @@
     "plugins": [
         "vue"
     ],
+    "ignorePatterns": [
+        "test/*"
+    ],
     "rules": {
         "linebreak-style": "off",
         "semi": "off",
         "no-console": "off",
         "brace-style": "off",
-        "radix": "off"
+        "radix": "off",
+        "no-underscore-dangle": "off"
     }
 }
