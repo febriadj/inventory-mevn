@@ -36,6 +36,7 @@
     "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
+    "apollo-boost": "^0.4.9",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "concurrently": "^6.3.0",
@@ -46,9 +47,11 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.6.1",
     "graphql-iso-date": "^3.6.1",
+    "graphql-tag": "^2.12.5",
     "mocha": "^9.1.2",
     "mongoose": "^6.0.10",
     "vue": "^2.6.14",
+    "vue-apollo": "^3.0.8",
     "vue-fragment": "^1.5.2",
     "vue-router": "^3.5.2"
   }
