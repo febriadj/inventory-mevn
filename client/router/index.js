@@ -9,6 +9,13 @@ const routes = [
     props: true,
   },
   {
+    name: 'Commodity',
+    path: '/commodity',
+    component: () => import('../views/commodity.vue'),
+    meta: { title: 'Commodity' },
+    props: true,
+  },
+  {
     name: 'NotFound',
     path: '*',
     component: () => import('../views/notfound.vue'),
