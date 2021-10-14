@@ -107,14 +107,14 @@ export default {
     },
     async handleSubmit() {
       const {
-        name, description, price, stock, warehouse,
+        name, description, price, stock, warehouse, categories,
       } = this.fields;
 
       this.$apollo.mutate({
         mutation: gql`mutation {
           AddCommodity(
             name: "${name}" description: "${description}" price: ${price} stock: ${stock}
-            warehouse: "${warehouse}"
+            warehouse: "${warehouse}" category: ${categories}
           ) {
             _id name description price stock warehouse category
             createdAt updatedAt
@@ -145,6 +145,7 @@ export default {
   width: 100%; height: 100%;
   display: flex; justify-content: flex-end;
   background: #352a3a0e;
+  z-index: 9;
 }
 #incoming-wrap {
   background: #fff;

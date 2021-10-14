@@ -1,8 +1,17 @@
 <template>
   <div :id="$style.commodity">
-    <Incoming v-if="incomingFormIsOpen" :updateList="this.handleGetList" />
+    <Incoming v-if="incomingFormIsOpen" :updateList="handleGetList" />
+    <Details
+      v-if="details.open"
+      :closeDetails="handleOpenDetails"
+      :details="details.data"
+    />
     <div :id="$style['commodity-wrap']">
-      <List :commodityList="commodityList" />
+      <List
+        :commodityList="commodityList"
+        :updateList="handleGetList"
+        :openDetails="handleOpenDetails"
+      />
     </div>
     <div :id="$style['open-incoming-commo']">
       <button
@@ -18,20 +27,27 @@
 import gql from 'graphql-tag';
 import List from '../components/commodity/list.vue';
 import Incoming from '../components/commodity/incoming.vue';
+import Details from '../components/commodity/details.vue';
 
 export default {
   name: 'Commodity',
   components: {
-    List, Incoming,
+    List, Incoming, Details,
   },
   data: () => ({
     commodityList: [],
     incomingFormIsOpen: false,
+    details: {
+      open: false, data: null,
+    },
   }),
   methods: {
     handleIncomingFormIsOpen() {
       this.incomingFormIsOpen = !this.incomingFormIsOpen;
-      return this.incomingFormIsOpen;
+
+      if (this.details.open) {
+        this.details.open = false;
+      }
     },
     async handleGetList() {
       try {
@@ -50,6 +66,10 @@ export default {
       catch (error0) {
         return console.error(error0.message);
       }
+    },
+    handleOpenDetails(item) {
+      this.details.open = !this.details.open;
+      this.details.data = item;
     },
   },
   async mounted() {
