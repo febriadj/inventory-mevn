@@ -1,7 +1,7 @@
 const { GraphQLSchema, GraphQLObjectType } = require('graphql');
 
 const { GetAllCommodities } = require('./queries/commodity');
-const { AddCommodity } = require('./mutations/commodity');
+const { AddCommodity, DeleteCommodity, EditCommodity } = require('./mutations/commodity');
 
 const query = new GraphQLObjectType({
   name: 'Query',
@@ -13,7 +13,7 @@ const query = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
-    AddCommodity,
+    AddCommodity, DeleteCommodity, EditCommodity,
   }),
 });
 
