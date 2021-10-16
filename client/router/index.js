@@ -1,18 +1,40 @@
 import VueRouter from 'vue-router';
+import Notfound from '../views/notfound.vue';
+
+const token = sessionStorage.getItem('token');
 
 const routes = [
   {
     name: 'Dashboard',
     path: '/dashboard',
-    component: () => import('../views/dashboard.vue'),
-    meta: { title: 'Dashboard' },
+    component() {
+      return !token ? Notfound : import('../views/dashboard.vue');
+    },
+    meta: {
+      title: !token ? 'Oopss. 404' : 'Dashboard',
+    },
     props: true,
   },
   {
     name: 'Commodity',
     path: '/commodity',
-    component: () => import('../views/commodity.vue'),
-    meta: { title: 'Commodity' },
+    component() {
+      return !token ? Notfound : import('../views/commodity.vue');
+    },
+    meta: {
+      title: !token ? 'Oopss. 404' : 'Commodity',
+    },
+    props: true,
+  },
+  {
+    name: 'Loan',
+    path: '/loan',
+    component() {
+      return !token ? Notfound : import('../views/loan.vue');
+    },
+    meta: {
+      title: !token ? 'Oopss. 404' : 'Loan',
+    },
     props: true,
   },
   {
