@@ -1,57 +1,75 @@
 <template>
   <div :id="$style.commodity">
-    <Incoming v-if="incomingFormIsOpen" :updateList="handleGetList" />
+    <Incoming v-if="incomingFormIsOpen" :handleIncomingForm="handleIncomingForm" />
+    <ApplyLoan
+      v-if="applyLoanTabIsOpen"
+      :handleApplyLoanTab="handleApplyLoanTab"
+      :commodityData="details"
+      :convertToRupiah="convertToRupiah"
+    />
     <Details
-      v-if="details.open"
-      :closeDetails="handleOpenDetails"
-      :details="details.data"
+      :details="details"
+      :handleApplyLoanTab="handleApplyLoanTab"
+      :convertToRupiah="convertToRupiah"
     />
     <div :id="$style['commodity-wrap']">
+      <div :id="$style.header">
+        <button
+          :class="$style['create-commo-btn']"
+          @click="handleIncomingForm"
+        >
+          <i class="bx bx-plus"></i>
+          <p :class="$style.paragraf">Create New Commodity</p>
+        </button>
+      </div>
       <List
         :commodityList="commodityList"
-        :updateList="handleGetList"
         :openDetails="handleOpenDetails"
+        :details="details"
+        :convertToRupiah="convertToRupiah"
       />
-    </div>
-    <div :id="$style['open-incoming-commo']">
-      <button
-        class="bx bx-plus"
-        :class="$style.btn"
-        @click="handleIncomingFormIsOpen"
-      ></button>
     </div>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag';
+
 import List from '../components/commodity/list.vue';
 import Incoming from '../components/commodity/incoming.vue';
 import Details from '../components/commodity/details.vue';
+import ApplyLoan from '../components/commodity/applyLoan.vue';
 
 export default {
   name: 'Commodity',
   components: {
-    List, Incoming, Details,
+    List, Incoming, Details, ApplyLoan,
   },
   data: () => ({
     commodityList: [],
     incomingFormIsOpen: false,
-    details: {
-      open: false, data: null,
-    },
+    applyLoanTabIsOpen: false,
+    details: null,
   }),
   methods: {
-    handleIncomingFormIsOpen() {
+    handleIncomingForm() {
       this.incomingFormIsOpen = !this.incomingFormIsOpen;
+    },
+    convertToRupiah(numeric) {
+      let rupiah = '';
+      const numToStr = numeric.toString().split('').reverse().join('');
 
-      if (this.details.open) {
-        this.details.open = false;
+      for (let i = 0; i < numToStr.length; i += 1) {
+        if (i % 3 === 0) {
+          rupiah += `${numToStr.substr(i, 3)}.`;
+        }
       }
+
+      return `Rp${rupiah.split('', rupiah.length - 1).reverse().join('')}`;
     },
     async handleGetList() {
       try {
-        const req = await this.$apollo.query({
+        const request = await this.$apollo.query({
           query: gql`{
             GetAllCommodities(orderBy: "desc") {
               _id name description price stock warehouse category
@@ -60,20 +78,36 @@ export default {
           }`,
         });
 
-        this.commodityList = req.data.GetAllCommodities;
-        return this.commodityList;
+        this.commodityList = request.data.GetAllCommodities;
       }
       catch (error0) {
-        return console.error(error0.message);
+        console.error(error0.message);
       }
     },
     handleOpenDetails(item) {
-      this.details.open = !this.details.open;
-      this.details.data = item;
+      this.details = item;
+    },
+    handleApplyLoanTab() {
+      this.applyLoanTabIsOpen = !this.applyLoanTabIsOpen;
     },
   },
   async mounted() {
     await this.handleGetList();
+
+    this.details = !this.details ? this.commodityList[0] : this.details;
+
+    if (this.commodityList.length === 0) {
+      this.details = {
+        name: 'Undefined',
+        description: 'Undefined',
+        price: '',
+        stock: 'Undefined',
+        warehouse: 'Undefined',
+        category: ['Undefined'],
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      }
+    }
   },
 }
 </script>
@@ -83,23 +117,18 @@ export default {
   width: 100%;
 }
 #commodity-wrap {
-  padding: 20px 20px 20px 240px;
+  padding: 20px 0;
+  margin: 0 460px 0 240px;
 }
-#open-incoming-commo {
-  position: fixed;
-  bottom: 0;
-  width: 100%; height: 60px;
-  display: flex; justify-content: flex-end; align-items: center;
-  transform: translateY(100px);
-  z-index: 9;
+#commodity-wrap #header {
+  display: flex;
+  margin: 0 0 20px 0;
 }
-#open-incoming-commo .btn {
-  transform: translateY(-120px) translateX(-20px);
-  width: 60px; height: 60px;
-  display: flex; justify-content: center; align-items: center;
-  font-size: 2rem;
-  border-radius: 50%;
-  background: #95899e;
+#commodity-wrap #header .create-commo-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff;
   cursor: pointer;
+  padding: 4px 20px;
+  border-radius: 2rem;
 }
 </style>

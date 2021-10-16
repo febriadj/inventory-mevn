@@ -1,30 +1,42 @@
 <template>
   <div :id="$style.details">
     <div :id="$style['details-wrap']">
-      <div :id="$style['close-tab']">
-        <button :class="$style.btn" @click="closeDetails">
-          <span class="bx bx-undo" :class="$style.icon"></span>
-          <p :class="$style.paragraf">Close Tab</p>
+      <div :id="$style.top">
+        <div :id="$style.header">
+          <h2 :class="$style.title">Commodity Details</h2>
+        </div>
+        <table :id="$style.table">
+          <tr><td>Name</td><td :class="$style.item">{{ details.name }}</td></tr>
+          <tr><td>Description</td><td :class="$style.item">{{ details.description }}</td></tr>
+          <tr><td>Price</td><td :class="$style.item">{{ convertToRupiah(details.price) }}</td></tr>
+          <tr><td>Stock</td><td :class="$style.item">{{ details.stock }}</td></tr>
+          <tr><td>Warehouse</td><td :class="$style.item">{{ details.warehouse }}</td></tr>
+          <tr>
+            <td>Category</td>
+            <td :class="$style.item">
+              <p :class="$style.categories"
+                v-for="item of details.category"
+                :key="item._id">{{ item }}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td :class="$style.item">{{ setDateTime(details.createdAt) }}</td>
+          </tr>
+          <tr>
+            <td>Updated</td>
+            <td :class="$style.item">{{ setDateTime(details.updatedAt) }}</td>
+          </tr>
+        </table>
+      </div>
+      <div :id="$style['apply-loan']">
+        <button
+          :class="$style.btn"
+          @click="handleApplyLoanTab()"
+        > Apply for a Loan
         </button>
       </div>
-      <table :id="$style.table">
-        <tr><td>Name</td><td :class="$style.item">{{ details.name }}</td></tr>
-        <tr><td>Description</td><td :class="$style.item">{{ details.description }}</td></tr>
-        <tr><td>Price</td><td :class="$style.item">{{ details.price }}</td></tr>
-        <tr><td>Stock</td><td :class="$style.item">{{ details.stock }}</td></tr>
-        <tr><td>Warehouse</td><td :class="$style.item">{{ details.warehouse }}</td></tr>
-        <tr>
-          <td>Category</td>
-          <td :class="$style.item">
-            <p :class="$style.categories"
-              v-for="item of details.category"
-              :key="item._id">{{ item }}
-            </p>
-          </td>
-        </tr>
-        <tr><td>Created</td><td :class="$style.item">{{ setDateTime(details.createdAt) }}</td></tr>
-        <tr><td>Updated</td><td :class="$style.item">{{ setDateTime(details.updatedAt) }}</td></tr>
-      </table>
     </div>
   </div>
 </template>
@@ -33,8 +45,9 @@
 export default {
   name: 'CommodityDetails',
   props: {
-    closeDetails: Function,
     details: Object,
+    handleApplyLoanTab: Function,
+    convertToRupiah: Function,
   },
   methods: {
     setDateTime(item) {
@@ -52,19 +65,22 @@ export default {
 #details {
   position: fixed;
   display: flex; justify-content: flex-end;
-  width: 100%; height: 100%;
-  background: #352a3a0e;
-  z-index: 2;
+  height: 100%;
+  right: 0;
 }
 #details-wrap {
-  width: 500px;
+  width: 380px;
   background: #fff;
-  padding: 10px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 20px;
+  margin: 20px;
 }
-#close-tab {
-  display: flex;
+#header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px;
+  margin: 0 0 20px 0;
 }
-#close-tab .btn {
+#header .btn {
   display: flex; align-items: center;
   background: #f5e7ff;
   gap: 10px;
@@ -72,20 +88,23 @@ export default {
   border-radius: 2rem;
   cursor: pointer;
 }
-#close-tab .btn:hover {
+#header .btn:hover {
   filter: brightness(0.95);
 }
-#close-tab .icon {
+#header .icon {
   border-radius: 50%;
   font-size: 1.5rem;
 }
 #details-wrap #table {
   margin: 10px 0 0 0;
-  border-spacing: 10px;
   width: 100%;
+  border-collapse: collapse;
+}
+tr td:nth-child(1) {
+  width: 90px;
 }
 tr td {
-  padding: 0 0 5px 0;
+  padding: 10px 0;
   vertical-align: top;
 }
 tr .item {
@@ -96,5 +115,18 @@ tr .item .categories {
   background: #f5e7ff;
   padding: 0 10px;
   border-radius: 2rem;
+}
+#apply-loan {
+  display: flex;
+  padding: 20px 0 0 0;
+}
+#apply-loan .btn {
+  background: #f5e7ff;
+  padding: 8px 15px;
+  border-bottom: 1px solid #352a3a;
+  cursor: pointer;
+}
+#apply-loan .btn:hover {
+  filter: brightness(0.95);
 }
 </style>

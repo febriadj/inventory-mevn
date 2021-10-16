@@ -2,12 +2,18 @@
   <div :id="$style.incoming">
     <div :id="$style['incoming-wrap']">
       <div :id="$style.header">
-        <h2 :class="$style.title">Create New Commodity</h2>
+        <div :id="$style.top">
+          <h2 :class="$style.title">Create New Commodity</h2>
+          <button :class="$style.btn" @click="handleIncomingForm">
+            <span class="bx bx-undo" :class="$style.icon"></span>
+            <p :class="$style.paragraf">Close Tab</p>
+          </button>
+        </div>
         <span :id="$style.notif">
           <p :class="$style.message" v-if="notif">{{ notif }}</p>
         </span>
       </div>
-      <form method="post" :id="$style.form" @submit.prevent="handleSubmit">
+      <form method="post" :id="$style.form" @submit.prevent="handleSubmit" autocomplete="off">
         <input
           type="text"
           name="name"
@@ -63,7 +69,7 @@
             {{ item }}
           </span>
         </div>
-        <button type="submit" :class="$style['submit-btn']">Create</button>
+        <button type="submit" :class="$style['submit-btn']">Submit</button>
       </form>
     </div>
   </div>
@@ -75,7 +81,7 @@ import gql from 'graphql-tag';
 export default {
   name: 'IncomingForm',
   props: {
-    updateList: { type: Function },
+    handleIncomingForm: Function,
   },
   data() {
     return {
@@ -107,14 +113,14 @@ export default {
     },
     async handleSubmit() {
       const {
-        name, description, price, stock, warehouse, categories,
+        name, description, price, stock, warehouse,
       } = this.fields;
 
       this.$apollo.mutate({
         mutation: gql`mutation {
           AddCommodity(
             name: "${name}" description: "${description}" price: ${price} stock: ${stock}
-            warehouse: "${warehouse}" category: ${categories}
+            warehouse: "${warehouse}"
           ) {
             _id name description price stock warehouse category
             createdAt updatedAt
@@ -125,7 +131,6 @@ export default {
         },
       });
 
-      await this.updateList();
       this.notif = 'Successfully added commodity';
 
       this.fields.name = '';
@@ -134,6 +139,10 @@ export default {
       this.fields.stock = '';
       this.fields.warehouse = '';
       this.fields.category = '';
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     },
   },
 }
@@ -143,8 +152,8 @@ export default {
 #incoming {
   position: fixed;
   width: 100%; height: 100%;
-  display: flex; justify-content: flex-end;
-  background: #352a3a0e;
+  display: flex; justify-content: center; align-items: center;
+  background: #352a3a46;
   z-index: 9;
 }
 #incoming-wrap {
@@ -152,18 +161,31 @@ export default {
   padding: 20px;
   width: 500px;
 }
-#header {
+#header #top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px;
   margin: 0 0 10px 0;
 }
-#notif {
+#header #top .btn {
+  display: flex; align-items: center;
+  background: #f5e7ff;
+  gap: 10px;
+  padding: 5px 20px 5px 10px;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+#header #top .btn:hover {
+  filter: brightness(0.95);
+}
+#header #top .btn .icon {
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+#header #notif {
   display: flex;
 }
-#notif .message {
-  margin: 20px 0 0 0;
-  background: #f5e7ff;
+#header #notif .message {
   font-size: 0.95rem;
-  padding: 4px 20px 4px 10px;
-  border-radius: 0 2rem 2rem 0;
 }
 #form {
   display: grid; grid-auto-columns: 1fr; gap: 10px;
@@ -184,10 +206,9 @@ export default {
 .input-description {
   grid-area: description;
   resize: none;
-  height: 100px;
+  height: 50px;
   border-bottom: 1px solid #352a3a;
   border-radius: 0;
-  margin: 20px 0 0 0;
 }
 .input-price { grid-area: price; }
 .input-stock { grid-area: stock; }
@@ -201,12 +222,15 @@ export default {
 #categories .item {
   text-decoration: underline;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 .submit-btn {
   grid-area: submit;
   padding: 10px 0;
   background: #f5e7ff;
   cursor: pointer;
+  border-radius: 2rem;
+  margin: 20px 0 0 0;
 }
 .submit-btn:hover {
   filter: brightness(0.95);

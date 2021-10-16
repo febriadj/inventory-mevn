@@ -9,8 +9,14 @@
         <td :class="$style.action">Action</td>
       </tr>
       <tr :class="$style['list-value']" v-for="item of commodityList" :key="item._id">
-        <td :class="$style.name" @click="openDetails(item)">{{ item.name }}</td>
-        <td :class="$style.price">{{ item.price }}</td>
+        <td :class="$style.name" @click="openDetails(item)">
+          <p :class="$style.paragraf"
+            :style="details._id === item._id ? 'text-decoration: underline' : null"
+          >
+          {{ item.name }}
+          </p>
+        </td>
+        <td :class="$style.price">{{ convertToRupiah(item.price) }}</td>
         <td :class="$style.stock">{{ item.stock }}</td>
         <td :class="$style.warehouse">{{ item.warehouse }}</td>
         <td :class="$style.action">
@@ -36,21 +42,25 @@ export default {
     commodityList: Array,
     updateList: Function,
     openDetails: Function,
+    details: Object,
+    convertToRupiah: Function,
   },
   methods: {
     async handleDeleteItem(commodityId) {
-      this.$apollo.mutate({
-        mutation: gql`mutation {
-          DeleteCommodity(_id: "${commodityId}") {
-            _id name warehouse
-          }
-        }`,
-        error(error0) {
-          this.notif = error0.message;
-        },
-      });
+      try {
+        await this.$apollo.mutate({
+          mutation: gql`mutation {
+            DeleteCommodity(_id: "${commodityId}") {
+              _id name warehouse
+            }
+          }`,
+        });
 
-      return window.location.reload();
+        window.location.reload();
+      }
+      catch (error0) {
+        this.notif = error0.message;
+      }
     },
   },
 }
@@ -62,9 +72,22 @@ export default {
 }
 #table {
   width: 100%;
+  border-collapse: collapse;
 }
 #table tr td {
   padding: 8px 10px;
+}
+tr .name {
+  overflow-x: hidden;
+  max-width: 230px;
+}
+tr .name .paragraf {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+tr .stock {
+  max-width: 30px;
 }
 .list-header {
   text-transform: uppercase;
@@ -81,11 +104,11 @@ export default {
 .list-value .name {
   cursor: pointer;
 }
-.list-value .name:hover {
-  background: #f5e7ff;
+.list-value .name:hover .paragraf {
+  text-decoration: underline;
 }
 .list-value .action .btn {
-  width: 30px; height: 30px;
+  width: 25px; height: 25px;
   border-radius: 50%;
   background: #f5e7ff;
   font-size: 0.9rem;
@@ -95,7 +118,8 @@ export default {
   filter: brightness(0.95);
 }
 .action {
-  display: flex; justify-content: center; align-items: center;
+  vertical-align: middle;
+  text-align: center;
   gap: 5px;
 }
 </style>
