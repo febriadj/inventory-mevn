@@ -1,8 +1,9 @@
 <template>
-  <fragment>
+  <!-- use vue fragment -->
+  <div>
     <Navbar />
     <router-view />
-  </fragment>
+  </div>
 </template>
 
 <script>
@@ -28,9 +29,11 @@ export default {
 body {
   font-family: neue-roman;
   font-size: 1rem;
+  background: #fcf7ff;
 }
-input, button {
+input, button, textarea {
   font-family: neue-roman;
   font-size: 1rem;
+  border-radius: 0;
 }
 </style>
