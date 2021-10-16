@@ -64,16 +64,26 @@ exports.RepayLoanPerStock = {
 
       // if the previous stock quantity is less than
       // the stock quantity requested by the customer, return an error message
-      if (prev.stock - args.quantity < 0) {
+      if (prev.quantity - args.quantity < 0) {
         const newErr = `Currently there are ${prev.quantity} loan amounts remaining, the loan request that you submitted cannot be accepted by us`;
         throw new Error(newErr);
       }
 
-      // reduction in the number of loan quantity
       const request = await LoanModel.findOneAndUpdate(
         { _id: args._id },
-        { $inc: { quantity: -args.quantity } },
+        {
+          // reduce the amount of the price to be paid
+          $set: { price: Math.round(prev.price / args.quantity) },
+          // reduction in the number of loan quantity
+          $inc: { quantity: -args.quantity },
+        },
       );
+
+      const check = await LoanModel.findOne({ _id: args._id });
+      // if the quantity is 0, delete the loan data
+      if (check.quantity === 0) {
+        await LoanModel.findOneAndDelete({ _id: args._id });
+      }
 
       // add the number of commodity stocks with the amount of
       // the loan quantity want to return
