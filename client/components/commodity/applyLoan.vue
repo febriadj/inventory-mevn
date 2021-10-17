@@ -103,24 +103,42 @@ export default {
     async handleSubmit() {
       try {
         await this.$apollo.mutate({
-          mutation: gql`mutation {
+          mutation: gql`mutation (
+            $commodityId: ID!
+            $commodityName: String
+            $customerName: String
+            $nik: String!
+            $quantity: Int
+            $warehouse: String
+            $price: Int
+          ) {
             AddLoan(
-              commodityId: "${this.commodityData._id}"
-              commodityName: "${this.commodityData.name}"
-              customerName: "${this.fields.customerName}"
-              nik: "${this.fields.nik}"
-              quantity: ${Number(this.fields.quantity)}
-              warehouse: "${this.commodityData.warehouse}"
-              price: ${this.fields.price}
+              commodityId: $commodityId
+              commodityName: $commodityName
+              customerName: $customerName
+              nik: $nik
+              quantity: $quantity
+              warehouse: $warehouse
+              price: $price
             ) {
               commodityId
               commodityName
               customerName
               nik
               quantity
+              warehouse
               price
             }
           }`,
+          variables: {
+            commodityId: this.commodityData._id,
+            commodityName: this.commodityData.name,
+            customerName: this.fields.customerName,
+            nik: this.fields.nik,
+            quantity: Number(this.fields.quantity),
+            warehouse: this.commodityData.warehouse,
+            price: Number(this.fields.price),
+          },
         });
 
         this.notif = 'Successfully apply for a loan';

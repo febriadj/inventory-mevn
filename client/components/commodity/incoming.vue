@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import { gql } from 'apollo-boost';
 
 export default {
   name: 'IncomingForm',
@@ -112,37 +112,51 @@ export default {
       this.fields.categories = this.fields.categories.filter((item) => item !== selected);
     },
     async handleSubmit() {
-      const {
-        name, description, price, stock, warehouse,
-      } = this.fields;
+      try {
+        await this.$apollo.mutate({
+          mutation: gql`mutation (
+              $name: String!
+              $description: String
+              $price: Int!
+              $stock: Int!
+              $warehouse: String!
+              $category: [String]
+            ) {
+            AddCommodity(
+              name: $name
+              description: $description
+              price: $price
+              stock: $stock
+              warehouse: $warehouse
+              category: $category
+            ) {
+              _id name description price stock warehouse category createdAt updatedAt
+            }
+          }`,
+          variables: {
+            name: this.fields.name,
+            description: this.fields.description,
+            price: Number(this.fields.price),
+            stock: Number(this.fields.stock),
+            warehouse: this.fields.warehouse,
+            category: this.fields.categories,
+          },
+        });
 
-      this.$apollo.mutate({
-        mutation: gql`mutation {
-          AddCommodity(
-            name: "${name}" description: "${description}" price: ${price} stock: ${stock}
-            warehouse: "${warehouse}"
-          ) {
-            _id name description price stock warehouse category
-            createdAt updatedAt
-          }
-        }`,
-        error(error0) {
-          this.notif = error0.message;
-        },
-      });
+        this.notif = 'Successfully added commodity';
 
-      this.notif = 'Successfully added commodity';
+        this.fields.name = '';
+        this.fields.description = '';
+        this.fields.price = '';
+        this.fields.stock = '';
+        this.fields.warehouse = '';
+        this.fields.category = '';
 
-      this.fields.name = '';
-      this.fields.description = '';
-      this.fields.price = '';
-      this.fields.stock = '';
-      this.fields.warehouse = '';
-      this.fields.category = '';
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+        setTimeout(() => this.$router.go(), 2000);
+      }
+      catch (error0) {
+        this.notif = error0.message;
+      }
     },
   },
 }
