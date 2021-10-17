@@ -22,6 +22,15 @@
           <p :class="$style.paragraf">Create New Commodity</p>
         </button>
       </div>
+      <div :id="$style['chart-box']">
+        <div :id="$style.header">
+          <h3 :class="$style.title">Chart of 4 newly updated Commodity data</h3>
+        </div>
+        <div :id="$style['chart-box-wrap']">
+          <canvas id="chart-stock" :class="$style['commodity-chart']"></canvas>
+          <canvas id="chart-price" :class="$style['commodity-chart']"></canvas>
+        </div>
+      </div>
       <List
         :commodityList="commodityList"
         :openDetails="handleOpenDetails"
@@ -33,7 +42,8 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import { gql } from 'apollo-boost';
+import Chart from 'chart.js/auto';
 
 import List from '../components/commodity/list.vue';
 import Incoming from '../components/commodity/incoming.vue';
@@ -45,12 +55,78 @@ export default {
   components: {
     List, Incoming, Details, ApplyLoan,
   },
-  data: () => ({
-    commodityList: [],
-    incomingFormIsOpen: false,
-    applyLoanTabIsOpen: false,
-    details: null,
-  }),
+  data() {
+    return {
+      commodityList: [],
+      incomingFormIsOpen: false,
+      applyLoanTabIsOpen: false,
+      details: null,
+      chartStockComponent() {
+        const chartData = [...this.commodityList].slice(0, 4);
+
+        const chart = new Chart(document.getElementById('chart-stock'), {
+          type: 'bar',
+          data: {
+            labels: chartData.map((item) => item.name),
+            datasets: [
+              {
+                label: 'Stock Quantity',
+                backgroundColor: [
+                  '#95899ebb', '#ffcbe1bb',
+                ],
+                maxBarThickness: 80,
+                data: chartData.map((item) => item.stock),
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            scales: {
+              x: {
+                ticks: {
+                  display: false,
+                },
+              },
+            },
+          },
+        });
+
+        return chart;
+      },
+      chartPriceComponent() {
+        const chartData = [...this.commodityList].slice(0, 4);
+
+        const chart = new Chart(document.getElementById('chart-price'), {
+          type: 'bar',
+          data: {
+            labels: chartData.map((item) => item.name),
+            datasets: [
+              {
+                label: 'Unit Price',
+                backgroundColor: [
+                  '#95899ebb', '#ffcbe1bb',
+                ],
+                maxBarThickness: 80,
+                data: chartData.map((item) => item.price),
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            scales: {
+              x: {
+                ticks: {
+                  display: false,
+                },
+              },
+            },
+          },
+        });
+
+        return chart;
+      },
+    }
+  },
   methods: {
     handleIncomingForm() {
       this.incomingFormIsOpen = !this.incomingFormIsOpen;
@@ -93,6 +169,8 @@ export default {
   },
   async mounted() {
     await this.handleGetList();
+    this.chartStockComponent();
+    this.chartPriceComponent();
 
     this.details = !this.details ? this.commodityList[0] : this.details;
 
@@ -130,5 +208,16 @@ export default {
   cursor: pointer;
   padding: 4px 20px;
   border-radius: 2rem;
+}
+#chart-box {
+  background: #fff;
+  margin: 0 0 20px 0;
+}
+#chart-box #header {
+  padding: 20px 20px 0 20px;
+}
+#chart-box-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding: 0 20px 20px 20px;
 }
 </style>
