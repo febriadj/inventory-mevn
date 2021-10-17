@@ -9,7 +9,7 @@
           <i class="bx bx-grid-alt"></i>
           <p :class="$style.paragraf">Dashboard</p>
         </router-link>
-        <router-link to="/commodity" :class="$style.links">
+        <router-link to="/commodity" :class="$style.links" style="background: #fff">
           <i class="bx bx-cube-alt"></i>
           <p :class="$style.paragraf">Commodity</p>
         </router-link>
@@ -57,7 +57,6 @@ export default {
     async handleGetUser() {
       try {
         const token = sessionStorage.getItem('token');
-        console.log(token);
 
         const request = await this.$apollo.query({
           query: gql`query ($tokenExists: Boolean!, $token: String!) {
