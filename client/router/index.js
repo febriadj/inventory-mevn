@@ -1,39 +1,37 @@
 import VueRouter from 'vue-router';
-import Notfound from '../views/notfound.vue';
 
 const token = sessionStorage.getItem('token');
 
 const routes = [
   {
     name: 'Dashboard',
-    path: '/dashboard',
+    path: '/',
     component() {
-      return !token ? Notfound : import('../views/dashboard.vue');
+      return token ? import('../views/dashboard.vue') : import('../views/login.vue');
     },
     meta: {
-      title: !token ? 'Oopss. 404' : 'Dashboard',
+      title: 'Inventory - Dashboard',
+      requireAuth: false,
     },
     props: true,
   },
   {
     name: 'Commodity',
     path: '/commodity',
-    component() {
-      return !token ? Notfound : import('../views/commodity.vue');
-    },
+    component: () => import('../views/commodity.vue'),
     meta: {
-      title: !token ? 'Oopss. 404' : 'Commodity',
+      title: 'Inventory - Commodity',
+      requireAuth: true,
     },
     props: true,
   },
   {
     name: 'Loan',
     path: '/loan',
-    component() {
-      return !token ? Notfound : import('../views/loan.vue');
-    },
+    component: () => import('../views/loan.vue'),
     meta: {
-      title: !token ? 'Oopss. 404' : 'Loan',
+      title: 'Inventory - Loan',
+      requireAuth: true,
     },
     props: true,
   },
@@ -41,7 +39,10 @@ const routes = [
     name: 'NotFound',
     path: '*',
     component: () => import('../views/notfound.vue'),
-    meta: { title: 'Opss. 404' },
+    meta: {
+      title: 'Inventory - Opss. 404',
+      requireAuth: false,
+    },
     props: true,
   },
 ];
@@ -53,6 +54,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
+
+  if (to.meta.requireAuth) {
+    if (!token) {
+      window.location.href = '/';
+    }
+  }
   next();
 });
 
