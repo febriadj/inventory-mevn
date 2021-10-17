@@ -30,11 +30,11 @@
         <div :id="$style['profile-wrap']">
           <div :class="$style.photo"></div>
           <div :class="$style.text">
-            <p :class="$style['profile-name']">Febriadji</p>
+            <p :class="$style['profile-name']">{{ user.profileName }}</p>
             <p :class="$style.role">Admin</p>
           </div>
           <button
-            class="bx bx-exit"
+            class="bx bx-log-out-circle"
             :class="$style['exit-btn']"
           ></button>
         </div>
@@ -44,8 +44,46 @@
 </template>
 
 <script>
+import { gql } from 'apollo-boost';
+
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      user: null,
+    }
+  },
+  methods: {
+    async handleGetUser() {
+      try {
+        const token = sessionStorage.getItem('token');
+        console.log(token);
+
+        const request = await this.$apollo.query({
+          query: gql`query ($tokenExists: Boolean!, $token: String!) {
+            UserVerify(tokenExists: $tokenExists, token: $token) {
+              _id
+              email
+              profileName
+              photo
+            }
+          }`,
+          variables: {
+            tokenExists: token !== false,
+            token,
+          },
+        });
+
+        this.user = request.data.UserVerify;
+      }
+      catch (error0) {
+        console.error(error0.message);
+      }
+    },
+  },
+  async mounted() {
+    this.handleGetUser();
+  },
 }
 </script>
 
