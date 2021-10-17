@@ -1,7 +1,6 @@
 const {
   GraphQLNonNull,
   GraphQLString,
-  GraphQLBoolean,
 } = require('graphql');
 
 const jwt = require('jsonwebtoken');
@@ -67,30 +66,6 @@ exports.UserLogin = {
       const createToken = await jwt.sign({ _id: request._id }, process.env.SECRET_TOKEN);
 
       return { token: createToken };
-    }
-    catch (error0) {
-      return new Error(error0);
-    }
-  },
-}
-
-exports.UserVerify = {
-  type: UserType,
-  args: {
-    tokenExists: { type: new GraphQLNonNull(GraphQLBoolean) },
-    token: { type: GraphQLString },
-  },
-  resolve: async (parent, args) => {
-    try {
-      if (!args.tokenExists) {
-        const newErr = 'Authentication token not found';
-        throw newErr;
-      }
-
-      const user = await jwt.verify(args.token, process.env.SECRET_TOKEN);
-      // output example: { _id: ..., iat: ... }
-      const request = await UserModel.findOne({ _id: user._id });
-      return request;
     }
     catch (error0) {
       return new Error(error0);
