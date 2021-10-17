@@ -1,7 +1,7 @@
 {
-  "name": "vue-inventory-barang",
+  "name": "inventory-mevn",
   "version": "1.0.0",
-  "description": "aplikasi inventory barang sederhana menggunakan stack mevn",
+  "description": "Aplikasi inventory yang dirancang untuk mempermudah pengelolaan persediaan barang/komoditas",
   "main": "server/index.js",
   "scripts": {
     "server-start": "node server/index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/febriadj/vue-inventory-barang.git"
+    "url": "git+https://github.com/febriadj/inventory-mevn.git"
   },
   "author": "febriadji",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/febriadj/vue-inventory-barang/issues"
+    "url": "https://github.com/febriadj/inventory-mevn/issues"
   },
-  "homepage": "https://github.com/febriadj/vue-inventory-barang#readme",
+  "homepage": "https://github.com/febriadj/inventory-mevn#readme",
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
