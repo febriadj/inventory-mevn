@@ -7,11 +7,39 @@
 </template>
 
 <script>
+import { gql } from 'apollo-boost';
 import Navbar from './components/utils/navbar.vue';
 
 export default {
   name: 'App',
   components: { Navbar },
+  methods: {
+    async getUserData() {
+      const token = sessionStorage.getItem('token');
+
+      try {
+        const user = await this.$apollo.query({
+          query: gql`query ($tokenExists: Boolean!, $token: String!) {
+            UserVerify(tokenExists: $tokenExists, token: $token) {
+              _id email profileName photo
+            }
+          }`,
+          variables: {
+            tokenExists: token !== null,
+            token,
+          },
+        });
+
+        this.$store.dispatch('counter/getUser', user.data.UserVerify);
+      }
+      catch (error0) {
+        console.error(error0.message);
+      }
+    },
+  },
+  async mounted() {
+    await this.getUserData();
+  },
 }
 </script>
 
