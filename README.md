@@ -39,9 +39,11 @@ Jalankan aplikasi dalam lingkungan pengembangan
 npm run dev
 ~~~
 
-# Tangkapan Layar
+# Penggunaan
 ![sample-app](./documents/images/sample-app.png)
 Ini adalah hasil tangkapan layar yang saya ambil pada halaman `/commodity`. Pada halaman ini pengguna dapat mengelola dan mengawasi persediaan barang/komoditas.
+
+Semua aktifitas pendataan yang dilakukan oleh pengguna hanya dapat dilihat oleh pengguna itu sendiri, artinya setiap akun yang terdaftar pada aplikasi ini memiliki ruangan kerja mereka sendiri.
 
 # Kontribusi
 Kontribusi membuat komunitas open source menjadi tempat yang luar biasa untuk belajar, menginspirasi, dan berkreasi. Setiap kontribusi yang anda buat sangat saya hargai.
