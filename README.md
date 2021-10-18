@@ -1,13 +1,13 @@
 # Inventory App
-![nodejs](https://img.shields.io/badge/nodejs-f5e7ff?style=for-the-badge&logo=node.js&logoColor=black)
-![express](https://img.shields.io/badge/Express.js-ffcbe1?style=for-the-badge&logo=express&logoColor=black)
-![vue](https://img.shields.io/badge/Vue.js-f5e7ff?style=for-the-badge&logo=vuedotjs&logoColor=black)
-![graphql](https://img.shields.io/badge/GraphQl-95899e?style=for-the-badge&logo=graphql&logoColor=white)
-![apollo](https://img.shields.io/badge/Apollo%20GraphQL-f5e7ff?&style=for-the-badge&logo=Apollo%20GraphQL&logoColor=black)
-![mongodb](https://img.shields.io/badge/MongoDB-ffcbe1?style=for-the-badge&logo=mongodb&logoColor=black)
-![webpack](https://img.shields.io/badge/Webpack-f5e7ff?style=for-the-badge&logo=Webpack&logoColor=black)
-![jwt](https://img.shields.io/badge/JWT-95899e?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
-![chartjs](https://img.shields.io/badge/Chart.js-f5e7ff?style=for-the-badge&logo=chartdotjs&logoColor=black)
+![nodejs](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
+![express](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)
+![vue](https://img.shields.io/badge/Vue.js-35495E?style=flat-square&logo=vuedotjs&logoColor=4FC08D)
+![graphql](https://img.shields.io/badge/GraphQL-E10098?style=flat-square&logo=graphql&logoColor=white)
+![apollo](https://img.shields.io/badge/Apollo%20GraphQL-311C87?style=flat-square&logo=Apollo%20GraphQL&logoColor=white)
+![mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white)
+![webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=black)
+![jwt](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=JSON%20web%20tokens&logoColor=white)
+![chartjs](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)
 
 Ini adalah aplikasi Inventory yang dirancang untuk mengelola, mengatur dan mengawasi segala hal mengenai pembelian dan peminjaman barang/komoditas.
 
@@ -46,7 +46,7 @@ Ini adalah hasil tangkapan layar yang saya ambil pada halaman `/commodity`. Pada
 # Kontribusi
 Kontribusi membuat komunitas open source menjadi tempat yang luar biasa untuk belajar, menginspirasi, dan berkreasi. Setiap kontribusi yang anda buat sangat saya hargai.
 
-Jika Anda memiliki saran yang akan membuat ini lebih baik, silakan fork repo ini dan ajukan permintaan tarik. Anda juga dapat membuka issue pada proyek ini dan jangan lupa untuk memberi proyek ini bintang. Terima kasih.
+Jika anda memiliki saran yang akan membuat ini lebih baik, silakan fork repo ini dan ajukan permintaan tarik. Anda juga dapat membuka issue pada proyek ini dan jangan lupa untuk memberi proyek ini bintang. Terima kasih.
 
 - Fork Proyek Ini (`git clone https://github.com/febriadj/inventory-mevn`)
 - Buat Branch Baru (`git checkout -b namaBranch`)
@@ -55,5 +55,5 @@ Jika Anda memiliki saran yang akan membuat ini lebih baik, silakan fork repo ini
 - Ajukan Permintaan Tarik
 
 # Kontak
-[![webpack](https://img.shields.io/badge/Gmail-f5e7ff?style=for-the-badge&logo=gmail&logoColor=black)](mailto:iamfebriadji@gmail.com?subject=From%20&body=Hi%20Febri,%20)
-[![linkedin](https://img.shields.io/badge/LinkedIn-ffcbe1?style=for-the-badge&logo=LinkedIn&logoColor=black)](https://www.linkedin.com/in/febri-adji)
+[![webpack](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:iamfebriadji@gmail.com?subject=From%20&body=Hi%20Febri,%20)
+[![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/febri-adji)
