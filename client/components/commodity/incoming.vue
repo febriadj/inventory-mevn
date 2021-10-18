@@ -115,6 +115,7 @@ export default {
       try {
         await this.$apollo.mutate({
           mutation: gql`mutation (
+              $userId: String!
               $name: String!
               $description: String
               $price: Int!
@@ -123,6 +124,7 @@ export default {
               $category: [String]
             ) {
             AddCommodity(
+              userId: $userId
               name: $name
               description: $description
               price: $price
@@ -134,6 +136,7 @@ export default {
             }
           }`,
           variables: {
+            userId: this.$store.getters.getUser._id,
             name: this.fields.name,
             description: this.fields.description,
             price: Number(this.fields.price),

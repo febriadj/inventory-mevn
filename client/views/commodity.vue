@@ -146,12 +146,18 @@ export default {
     async handleGetList() {
       try {
         const request = await this.$apollo.query({
-          query: gql`{
-            GetAllCommodities(orderBy: "desc") {
+          query: gql`query($userId: String!, $orderBy: String!) {
+            GetAllCommodities(
+              userId: $userId, orderBy: $orderBy
+            ) {
               _id name description price stock warehouse category
               createdAt updatedAt
             }
           }`,
+          variables: {
+            userId: this.$store.getters.getUser._id,
+            orderBy: 'desc',
+          },
         });
 
         this.commodityList = request.data.GetAllCommodities;

@@ -49,11 +49,15 @@ export default {
     async handleDeleteItem(commodityId) {
       try {
         await this.$apollo.mutate({
-          mutation: gql`mutation {
-            DeleteCommodity(_id: "${commodityId}") {
-              _id name warehouse
+          mutation: gql`mutation($_id: ID!, $userId: String!) {
+            DeleteCommodity(_id: $_id, userId: $userId) {
+              _id name
             }
           }`,
+          variables: {
+            _id: commodityId,
+            userId: this.$store.getters.getUser._id,
+          },
         });
 
         window.location.reload();

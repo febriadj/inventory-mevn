@@ -104,6 +104,7 @@ export default {
       try {
         await this.$apollo.mutate({
           mutation: gql`mutation (
+            $userId: String!
             $commodityId: ID!
             $commodityName: String
             $customerName: String
@@ -113,6 +114,7 @@ export default {
             $price: Int
           ) {
             AddLoan(
+              userId: $userId
               commodityId: $commodityId
               commodityName: $commodityName
               customerName: $customerName
@@ -121,6 +123,7 @@ export default {
               warehouse: $warehouse
               price: $price
             ) {
+              userId
               commodityId
               commodityName
               customerName
@@ -131,6 +134,7 @@ export default {
             }
           }`,
           variables: {
+            userId: this.$store.getters.getUser._id,
             commodityId: this.commodityData._id,
             commodityName: this.commodityData.name,
             customerName: this.fields.customerName,
