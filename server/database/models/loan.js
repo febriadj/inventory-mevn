@@ -1,13 +1,24 @@
 const { Schema, model } = require('mongoose');
 
 const LoanModel = model('loans', new Schema({
-  commodityId: { type: String, required: true },
-  commodityName: { type: String },
-  customerName: { type: String },
-  nik: { type: String, required: true },
-  quantity: { type: Schema.Types.Number, default: 0 },
-  warehouse: { type: String },
-  price: { type: Schema.Types.Number, default: 0 },
+  userId: {
+    type: String, required: true,
+  },
+  commodityId: {
+    type: String, required: true,
+  },
+  commodityName: String,
+  customerName: String,
+  nik: {
+    type: String, required: true,
+  },
+  warehouse: String,
+  quantity: {
+    type: Number, default: 0,
+  },
+  price: {
+    type: Number, default: 0,
+  },
 }, {
   timestamps: true,
 }));

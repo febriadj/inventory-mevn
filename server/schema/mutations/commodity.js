@@ -12,6 +12,7 @@ const CommodityType = require('../types/commodity');
 exports.AddCommodity = {
   type: CommodityType,
   args: {
+    userId: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     description: { type: GraphQLString },
     price: { type: GraphQLInt },
@@ -25,7 +26,7 @@ exports.AddCommodity = {
       return commodity._doc;
     }
     catch (error0) {
-      return error0.message;
+      return new Error(error0);
     }
   },
 }
@@ -43,7 +44,7 @@ exports.DeleteCommodity = {
       return response;
     }
     catch (error0) {
-      return error0.message;
+      return new Error(error0);
     }
   },
 }
@@ -77,7 +78,7 @@ exports.EditCommodity = {
       return request;
     }
     catch (error0) {
-      return error0.message;
+      return new Error(error0);
     }
   },
 }

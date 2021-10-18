@@ -9,8 +9,16 @@ const {
 module.exports = new GraphQLObjectType({
   name: 'LoanType',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
-    commodityId: { type: new GraphQLNonNull(GraphQLID) },
+    _id: {
+      type: new GraphQLNonNull(GraphQLID),
+    },
+    userId: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'UserId acts as a foreign key to connect with the users collection',
+    },
+    commodityId: {
+      type: new GraphQLNonNull(GraphQLID),
+    },
     commodityName: {
       type: GraphQLString,
       description: 'The name of the Commodity to be borrowed',
@@ -27,7 +35,11 @@ module.exports = new GraphQLObjectType({
       type: GraphQLInt,
       description: 'The number of items to be borrowed will affect the price to be paid',
     },
-    warehouse: { type: GraphQLString },
-    price: { type: GraphQLInt },
+    warehouse: {
+      type: GraphQLString,
+    },
+    price: {
+      type: GraphQLInt,
+    },
   }),
 });

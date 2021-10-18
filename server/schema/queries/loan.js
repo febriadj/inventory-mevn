@@ -10,8 +10,11 @@ const LoanType = require('../types/loan');
 exports.GetAllLoan = {
   type: new GraphQLList(LoanType),
   args: {
-    orderBy: {
+    userId: {
       type: new GraphQLNonNull(GraphQLString),
+    },
+    orderBy: {
+      type: GraphQLString,
     },
   },
   resolve: async (parent, args) => {
@@ -19,7 +22,9 @@ exports.GetAllLoan = {
       // by default sort all commodities data in descending
       const { orderBy = 'desc' } = args;
 
-      const response = await LoanModel.find().sort({
+      const response = await LoanModel.find({
+        userId: args.userId,
+      }).sort({
         updatedAt: orderBy === 'desc' ? -1 : 1,
       });
 

@@ -12,13 +12,23 @@ const { GraphQLDateTime } = require('graphql-iso-date');
 const commodity = new GraphQLObjectType({
   name: 'CommodityType',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: {
+      type: new GraphQLNonNull(GraphQLID),
+    },
+    userId: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'UserId acts as a foreign key to connect with the users collection',
+    },
     name: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'Name of Commodity',
     },
-    description: { type: GraphQLString },
-    price: { type: new GraphQLNonNull(GraphQLInt) },
+    description: {
+      type: GraphQLString,
+    },
+    price: {
+      type: new GraphQLNonNull(GraphQLInt),
+    },
     stock: {
       type: GraphQLInt,
       description: 'Amount of stock remaining',
@@ -27,9 +37,15 @@ const commodity = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'Warehouse name for this Commodity',
     },
-    category: { type: new GraphQLList(GraphQLString) },
-    createdAt: { type: GraphQLDateTime },
-    updatedAt: { type: GraphQLDateTime },
+    category: {
+      type: new GraphQLList(GraphQLString),
+    },
+    createdAt: {
+      type: GraphQLDateTime,
+    },
+    updatedAt: {
+      type: GraphQLDateTime,
+    },
   }),
 });
 
