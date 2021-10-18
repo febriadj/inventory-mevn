@@ -6,6 +6,7 @@ import VueApollo from 'vue-apollo';
 
 import router from './router/index';
 import App from './app.vue';
+import store from './store/index';
 
 Vue.use(VueRouter);
 Vue.use(Fragment.Plugin);
@@ -25,7 +26,8 @@ const apolloProvider = new VueApollo({
 });
 
 new Vue({
-  apolloProvider,
-  router,
   render: (element) => element(App),
+  router,
+  store,
+  apolloProvider,
 }).$mount('#root');
