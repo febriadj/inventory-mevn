@@ -69,7 +69,7 @@ export default {
   right: 0;
 }
 #details-wrap {
-  width: 380px;
+  width: 350px;
   background: #fff;
   display: flex; flex-direction: column; justify-content: space-between;
   padding: 20px;
@@ -82,7 +82,7 @@ export default {
 }
 #header .btn {
   display: flex; align-items: center;
-  background: #f5e7ff;
+  background: #e3e3e9;
   gap: 10px;
   padding: 5px 20px 5px 10px;
   border-radius: 2rem;
@@ -112,7 +112,7 @@ tr .item {
   display: flex; justify-content: flex-start; gap: 5px;
 }
 tr .item .categories {
-  background: #f5e7ff;
+  background: #e3e3e9;
   padding: 0 10px;
   border-radius: 2rem;
 }
@@ -121,8 +121,8 @@ tr .item .categories {
   padding: 20px 0 0 0;
 }
 #apply-loan .btn {
-  background: #f5e7ff;
-  padding: 8px 15px;
+  background: #e3e3e9;
+  padding: 5px 10px;
   border-bottom: 1px solid #352a3a;
   cursor: pointer;
 }

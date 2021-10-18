@@ -169,7 +169,7 @@ export default {
   display: flex;
 }
 #apply-loan-wrap {
-  width: 380px;
+  width: 350px;
   background: #fff;
   padding: 20px;
   margin: 20px;
@@ -184,7 +184,7 @@ export default {
 }
 #header .btn {
   display: flex; align-items: center;
-  background: #f5e7ff;
+  background: #e3e3e9;
   gap: 10px;
   padding: 5px 20px 5px 10px;
   border-radius: 2rem;
@@ -232,7 +232,7 @@ input::-webkit-inner-spin-button {
 .submit-btn {
   grid-area: submit;
   padding: 10px 0;
-  background: #f5e7ff;
+  background: #e3e3e9;
   border-bottom: 1px solid #352a3a;
   cursor: pointer;
   margin: 20px 0 0 0;

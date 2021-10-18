@@ -9,7 +9,7 @@
           <i class="bx bx-grid-alt"></i>
           <p :class="$style.paragraf">Dashboard</p>
         </router-link>
-        <router-link to="/commodity" :class="$style.links" style="background: #fff">
+        <router-link to="/commodity" :class="$style.links">
           <i class="bx bx-cube-alt"></i>
           <p :class="$style.paragraf">Commodity</p>
         </router-link>
@@ -91,7 +91,8 @@ export default {
   position: fixed;
   width: 220px; height: 100%;
   display: flex;
-  background: #f5e7ff;
+  background: #171724;
+  color: #ffffffda;
 }
 #navbar-wrap {
   display: grid; grid-template-rows: auto 1fr auto;
@@ -108,14 +109,15 @@ export default {
 }
 #link .links {
   text-decoration: none;
-  color: #000;
+  color: #ffffffda;
   display: grid; grid-template-columns: auto 1fr; gap: 20px;
   align-items: center;
   padding: 10px 20px;
   border-radius: 0 2rem 2rem 0;
 }
 #link .links:hover {
-  background: #fff;
+  background: #303044;
+  color: #fff;
 }
 #link .links .icon {
   width: 30px;
@@ -129,7 +131,7 @@ export default {
 #profile #profile-wrap .photo {
   display: block;
   width: 50px; height: 50px;
-  background: #95899e;
+  background: #303044;
   border-radius: 50%;
 }
 #profile #profile-wrap .text {
@@ -141,8 +143,10 @@ export default {
 #profile #profile-wrap .exit-btn {
   cursor: pointer;
   font-size: 1.5rem;
+  background: transparent;
+  color: #fff;
 }
 #profile #profile-wrap .exit-btn:hover {
-  background: #ddcfe7;
+  background: #303044;
 }
 </style>

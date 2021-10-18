@@ -182,7 +182,7 @@ export default {
 }
 #header #top .btn {
   display: flex; align-items: center;
-  background: #f5e7ff;
+  background: #e3e3e9;
   gap: 10px;
   padding: 5px 20px 5px 10px;
   border-radius: 2rem;
@@ -241,7 +241,7 @@ export default {
 .submit-btn {
   grid-area: submit;
   padding: 10px 0;
-  background: #f5e7ff;
+  background: #e3e3e9;
   cursor: pointer;
   border-radius: 2rem;
   margin: 20px 0 0 0;

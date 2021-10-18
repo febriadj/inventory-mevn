@@ -29,7 +29,7 @@ export default {
 body {
   font-family: neue-roman;
   font-size: 1rem;
-  background: #fcf7ff;
+  background: #f5f5f5;
 }
 input, button, textarea {
   font-family: neue-roman;

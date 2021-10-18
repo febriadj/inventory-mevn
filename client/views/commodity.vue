@@ -72,7 +72,7 @@ export default {
               {
                 label: 'Stock Quantity',
                 backgroundColor: [
-                  '#95899ebb', '#ffcbe1bb',
+                  '#515164bb', '#8888a5bb',
                 ],
                 maxBarThickness: 80,
                 data: chartData.map((item) => item.stock),
@@ -104,7 +104,7 @@ export default {
               {
                 label: 'Unit Price',
                 backgroundColor: [
-                  '#95899ebb', '#ffcbe1bb',
+                  '#515164bb', '#8888a5bb',
                 ],
                 maxBarThickness: 80,
                 data: chartData.map((item) => item.price),
@@ -196,7 +196,7 @@ export default {
 }
 #commodity-wrap {
   padding: 20px 0;
-  margin: 0 460px 0 240px;
+  margin: 0 430px 0 240px;
 }
 #commodity-wrap #header {
   display: flex;

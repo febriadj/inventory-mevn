@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import { gql } from 'apollo-boost';
 
 export default {
   name: 'List',
@@ -110,7 +110,7 @@ tr .stock {
 .list-value .action .btn {
   width: 25px; height: 25px;
   border-radius: 50%;
-  background: #f5e7ff;
+  background: #e3e3e9;
   font-size: 0.9rem;
   cursor: pointer;
 }
