@@ -37,10 +37,15 @@ exports.DeleteCommodity = {
     _id: {
       type: new GraphQLNonNull(GraphQLID),
     },
+    userId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
   },
   resolve: async (parent, args) => {
     try {
-      const response = await CommodityModel.findOneAndDelete({ _id: args._id });
+      const response = await CommodityModel.findOneAndDelete({
+        $and: [{ _id: args._id }, { userId: args.userId }],
+      });
       return response;
     }
     catch (error0) {
@@ -53,6 +58,7 @@ exports.EditCommodity = {
   type: CommodityType,
   args: {
     _id: { type: new GraphQLNonNull(GraphQLID) },
+    userId: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     price: { type: GraphQLInt },
@@ -63,7 +69,7 @@ exports.EditCommodity = {
   resolve: async (parent, args) => {
     try {
       const request = await CommodityModel.findOneAndUpdate(
-        { _id: args._id },
+        { $and: [{ _id: args._id }, { userId: args.userId }] },
         {
           $set: {
             name: args.name,
