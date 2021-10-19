@@ -1,8 +1,8 @@
 const { GraphQLSchema, GraphQLObjectType } = require('graphql');
 
-const { GetAllCommodities } = require('./queries/commodity');
-const { AddCommodity, DeleteCommodity, EditCommodity } = require('./mutations/commodity');
-const { GetAllLoan } = require('./queries/loan');
+const { GetAllItems } = require('./queries/item');
+const { AddItem, DeleteItem, UpdateItem } = require('./mutations/item');
+const { GetAllLoans } = require('./queries/loan');
 const { AddLoan, RepayLoanPerStock } = require('./mutations/loan');
 const { UserVerify } = require('./queries/user');
 const { UserRegister, UserLogin } = require('./mutations/user');
@@ -10,8 +10,8 @@ const { UserRegister, UserLogin } = require('./mutations/user');
 const query = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
-    GetAllCommodities,
-    GetAllLoan,
+    GetAllItems,
+    GetAllLoans,
     UserVerify,
   }),
 });
@@ -22,10 +22,10 @@ const mutation = new GraphQLObjectType({
     // user authentication
     UserRegister,
     UserLogin,
-    // commodity
-    AddCommodity,
-    DeleteCommodity,
-    EditCommodity,
+    // item
+    AddItem,
+    DeleteItem,
+    UpdateItem,
     // loan
     AddLoan,
     RepayLoanPerStock,

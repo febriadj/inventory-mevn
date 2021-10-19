@@ -6,15 +6,15 @@ const {
 } = require('graphql');
 
 const LoanModel = require('../../database/models/loan');
-const CommodityModel = require('../../database/models/commodity');
+const ItemModel = require('../../database/models/item');
 const LoanType = require('../types/loan');
 
 exports.AddLoan = {
   type: LoanType,
   args: {
     userId: { type: new GraphQLNonNull(GraphQLString) },
-    commodityId: { type: new GraphQLNonNull(GraphQLID) },
-    commodityName: { type: GraphQLString },
+    itemId: { type: new GraphQLNonNull(GraphQLID) },
+    itemName: { type: GraphQLString },
     customerName: { type: GraphQLString },
     nik: { type: new GraphQLNonNull(GraphQLString) },
     quantity: { type: GraphQLInt },
@@ -23,10 +23,10 @@ exports.AddLoan = {
   },
   resolve: async (parent, args) => {
     try {
-      // find data by id or commodity name and stock quantity above 0
-      const prev = await CommodityModel.findOne({
+      // find data by id or item name and stock quantity above 0
+      const prev = await ItemModel.findOne({
         $and: [{
-          $or: [{ _id: args.commodityId }, { name: args.commodityName }],
+          $or: [{ _id: args.itemId }, { name: args.itemName }],
           userId: args.userId,
         }],
       });
@@ -43,9 +43,9 @@ exports.AddLoan = {
         throw newErr;
       }
 
-      // reduction in the number of commodity stocks
-      await CommodityModel.findOneAndUpdate(
-        { $and: [{ _id: args.commodityId }, { userId: args.userId }] },
+      // reduction in the number of item stocks
+      await ItemModel.findOneAndUpdate(
+        { $and: [{ _id: args.itemId }, { userId: args.userId }] },
         { $inc: { stock: -args.quantity } },
       );
 
@@ -102,10 +102,10 @@ exports.RepayLoanPerStock = {
         await LoanModel.findOneAndDelete({ _id: args._id });
       }
 
-      // add the number of commodity stocks with the amount of
+      // add the number of item stocks with the amount of
       // the loan quantity want to return
-      await CommodityModel.findOneAndUpdate(
-        { $and: [{ _id: request.commodityId }, { userId: args.userId }] },
+      await ItemModel.findOneAndUpdate(
+        { $and: [{ _id: request.itemId }, { userId: args.userId }] },
         { $inc: { stock: args.quantity } },
       );
 

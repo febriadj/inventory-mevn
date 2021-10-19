@@ -7,7 +7,7 @@ const {
 const LoanModel = require('../../database/models/loan');
 const LoanType = require('../types/loan');
 
-exports.GetAllLoan = {
+exports.GetAllLoans = {
   type: new GraphQLList(LoanType),
   args: {
     userId: {

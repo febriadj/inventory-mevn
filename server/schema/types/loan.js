@@ -16,10 +16,10 @@ module.exports = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'UserId acts as a foreign key to connect with the users collection',
     },
-    commodityId: {
+    itemId: {
       type: new GraphQLNonNull(GraphQLID),
     },
-    commodityName: {
+    itemName: {
       type: GraphQLString,
       description: 'The name of the Commodity to be borrowed',
     },

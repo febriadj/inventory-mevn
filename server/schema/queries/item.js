@@ -4,11 +4,11 @@ const {
   GraphQLString,
 } = require('graphql');
 
-const CommodityType = require('../types/commodity');
-const CommodityModel = require('../../database/models/commodity');
+const ItemType = require('../types/item');
+const ItemModel = require('../../database/models/item');
 
-exports.GetAllCommodities = {
-  type: new GraphQLList(CommodityType),
+exports.GetAllItems = {
+  type: new GraphQLList(ItemType),
   args: {
     userId: {
       type: new GraphQLNonNull(GraphQLString),
@@ -21,7 +21,7 @@ exports.GetAllCommodities = {
     // by default sort all commodities data in descending
     const { orderBy = 'desc' } = args;
 
-    const response = await CommodityModel.find({
+    const response = await ItemModel.find({
       userId: args.userId,
     }).sort({
       updatedAt: orderBy === 'desc' ? -1 : 1,

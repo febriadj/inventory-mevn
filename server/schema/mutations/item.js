@@ -6,11 +6,11 @@ const {
   GraphQLInt,
 } = require('graphql');
 
-const CommodityModel = require('../../database/models/commodity');
-const CommodityType = require('../types/commodity');
+const ItemModel = require('../../database/models/item');
+const ItemType = require('../types/item');
 
-exports.AddCommodity = {
-  type: CommodityType,
+exports.AddItem = {
+  type: ItemType,
   args: {
     userId: { type: new GraphQLNonNull(GraphQLString) },
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -22,8 +22,8 @@ exports.AddCommodity = {
   },
   resolve: async (parent, args) => {
     try {
-      const commodity = await new CommodityModel(args).save();
-      return commodity._doc;
+      const response = await new ItemModel(args).save();
+      return response._doc;
     }
     catch (error0) {
       return new Error(error0);
@@ -31,8 +31,8 @@ exports.AddCommodity = {
   },
 }
 
-exports.DeleteCommodity = {
-  type: CommodityType,
+exports.DeleteItem = {
+  type: ItemType,
   args: {
     _id: {
       type: new GraphQLNonNull(GraphQLID),
@@ -43,7 +43,7 @@ exports.DeleteCommodity = {
   },
   resolve: async (parent, args) => {
     try {
-      const response = await CommodityModel.findOneAndDelete({
+      const response = await ItemModel.findOneAndDelete({
         $and: [{ _id: args._id }, { userId: args.userId }],
       });
       return response;
@@ -54,8 +54,8 @@ exports.DeleteCommodity = {
   },
 }
 
-exports.EditCommodity = {
-  type: CommodityType,
+exports.UpdateItem = {
+  type: ItemType,
   args: {
     _id: { type: new GraphQLNonNull(GraphQLID) },
     userId: { type: new GraphQLNonNull(GraphQLString) },
@@ -68,7 +68,7 @@ exports.EditCommodity = {
   },
   resolve: async (parent, args) => {
     try {
-      const request = await CommodityModel.findOneAndUpdate(
+      const request = await ItemModel.findOneAndUpdate(
         { $and: [{ _id: args._id }, { userId: args.userId }] },
         {
           $set: {

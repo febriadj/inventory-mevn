@@ -4,10 +4,10 @@ const LoanModel = model('loans', new Schema({
   userId: {
     type: String, required: true,
   },
-  commodityId: {
+  itemId: {
     type: String, required: true,
   },
-  commodityName: String,
+  itemName: String,
   customerName: String,
   nik: {
     type: String, required: true,
