@@ -16,11 +16,11 @@ const routes = [
     props: true,
   },
   {
-    name: 'Commodity',
-    path: '/commodity',
-    component: () => import('../views/commodity.vue'),
+    name: 'Item',
+    path: '/item',
+    component: () => import('../views/item.vue'),
     meta: {
-      title: 'Inventory - Commodity',
+      title: 'Inventory - Item',
       requireAuth: true,
     },
     props: true,
