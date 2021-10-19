@@ -2,7 +2,7 @@
   <!-- use vue fragment -->
   <div>
     <Navbar />
-    <router-view />
+    <router-view v-if="loggedIn" />
   </div>
 </template>
 
@@ -13,6 +13,11 @@ import Navbar from './components/utils/navbar.vue';
 export default {
   name: 'App',
   components: { Navbar },
+  data() {
+    return {
+      loggedIn: false,
+    }
+  },
   methods: {
     async getUserData() {
       const token = sessionStorage.getItem('token');
@@ -31,6 +36,7 @@ export default {
         });
 
         this.$store.dispatch('counter/getUser', user.data.UserVerify);
+        this.loggedIn = true;
       }
       catch (error0) {
         console.error(error0.message);

@@ -16,9 +16,9 @@
       <form method="post" :id="$style.form" @submit.prevent="handleSubmit" autocomplete="off">
         <input
           type="text"
-          name="commodityName"
+          name="itemName"
           :class="$style['input-name']"
-          :value="commodityData.name"
+          :value="itemData.name"
           readonly
         />
         <input
@@ -41,7 +41,7 @@
           type="text"
           name="warehouse"
           :class="$style['input-warehouse']"
-          :value="commodityData.warehouse"
+          :value="itemData.warehouse"
           readonly
         />
         <input
@@ -71,7 +71,7 @@ export default {
   name: 'ApplyLoan',
   props: {
     handleApplyLoanTab: Function,
-    commodityData: Object,
+    itemData: Object,
     convertToRupiah: Function,
   },
   data() {
@@ -80,7 +80,7 @@ export default {
         customerName: '',
         nik: '',
         quantity: '',
-        price: this.commodityData.price,
+        price: this.itemData.price,
       },
       notif: null,
     }
@@ -97,7 +97,7 @@ export default {
       }
 
       if (this.fields.quantity.length === 0) {
-        this.fields.price = this.commodityData.price;
+        this.fields.price = this.itemData.price;
       }
     },
     async handleSubmit() {
@@ -105,8 +105,8 @@ export default {
         await this.$apollo.mutate({
           mutation: gql`mutation (
             $userId: String!
-            $commodityId: ID!
-            $commodityName: String
+            $itemId: ID!
+            $itemName: String
             $customerName: String
             $nik: String!
             $quantity: Int
@@ -115,8 +115,8 @@ export default {
           ) {
             AddLoan(
               userId: $userId
-              commodityId: $commodityId
-              commodityName: $commodityName
+              itemId: $itemId
+              itemName: $itemName
               customerName: $customerName
               nik: $nik
               quantity: $quantity
@@ -124,8 +124,8 @@ export default {
               price: $price
             ) {
               userId
-              commodityId
-              commodityName
+              itemId
+              itemName
               customerName
               nik
               quantity
@@ -135,12 +135,12 @@ export default {
           }`,
           variables: {
             userId: this.$store.getters.getUser._id,
-            commodityId: this.commodityData._id,
-            commodityName: this.commodityData.name,
+            itemId: this.itemData._id,
+            itemName: this.itemData.name,
             customerName: this.fields.customerName,
             nik: this.fields.nik,
             quantity: Number(this.fields.quantity),
-            warehouse: this.commodityData.warehouse,
+            warehouse: this.itemData.warehouse,
             price: Number(this.fields.price),
           },
         });
@@ -150,11 +150,9 @@ export default {
         this.fields.customerName = '';
         this.fields.nik = '';
         this.fields.quantity = '';
-        this.fields.price = this.commodityData.price;
+        this.fields.price = this.itemData.price;
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        setTimeout(() => this.$router.go(), 500);
       }
       catch (error0) {
         this.notif = error0.message;

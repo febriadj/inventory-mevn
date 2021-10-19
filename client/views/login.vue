@@ -85,12 +85,12 @@ export default {
 #login {
   position: absolute;
   width: 100%; height: 100%;
-  display: flex; justify-content: center; align-items: center;
-  background: #f5e7ff;
+  display: flex; justify-content: flex-start;
+  background: #171724;
   z-index: 9;
 }
 #login-wrap {
-  width: 350px;
+  width: 400px;
   background: #fff;
   padding: 20px;
 }
@@ -100,7 +100,7 @@ export default {
 #form {
   display: flex; flex-direction: column;
   gap: 20px;
-  margin: 20px 0 40px 0;
+  margin: 40px 0;
 }
 #form .line {
   display: flex; flex-direction: column;
@@ -120,7 +120,7 @@ export default {
 }
 .submit-btn {
   width: 150px;
-  background: #95899e;
+  background: #303044;
   display: flex; justify-content: center; align-items: center;
   cursor: pointer;
   padding: 10px 0;
@@ -130,6 +130,9 @@ export default {
   filter: brightness(0.95);
 }
 #footer {
+  position: absolute;
+  bottom: 0;
   display: flex; align-items: center; gap: 10px;
+  margin: 0 0 20px 0;
 }
 </style>

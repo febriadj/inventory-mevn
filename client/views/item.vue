@@ -1,10 +1,10 @@
 <template>
-  <div :id="$style.commodity">
+  <div :id="$style.item">
     <Incoming v-if="incomingFormIsOpen" :handleIncomingForm="handleIncomingForm" />
     <ApplyLoan
       v-if="applyLoanTabIsOpen"
       :handleApplyLoanTab="handleApplyLoanTab"
-      :commodityData="details"
+      :itemData="details"
       :convertToRupiah="convertToRupiah"
     />
     <Details
@@ -12,27 +12,27 @@
       :handleApplyLoanTab="handleApplyLoanTab"
       :convertToRupiah="convertToRupiah"
     />
-    <div :id="$style['commodity-wrap']">
+    <div :id="$style['item-wrap']">
       <div :id="$style.header">
         <button
           :class="$style['create-commo-btn']"
           @click="handleIncomingForm"
         >
           <i class="bx bx-plus"></i>
-          <p :class="$style.paragraf">Create New Commodity</p>
+          <p :class="$style.paragraf">Create New Item</p>
         </button>
       </div>
       <div :id="$style['chart-box']">
         <div :id="$style.header">
-          <h3 :class="$style.title">Chart of 4 newly updated Commodity data</h3>
+          <h3 :class="$style.title">Chart of 4 newly updated Item data</h3>
         </div>
         <div :id="$style['chart-box-wrap']">
-          <canvas id="chart-stock" :class="$style['commodity-chart']"></canvas>
-          <canvas id="chart-price" :class="$style['commodity-chart']"></canvas>
+          <canvas id="chart-stock" :class="$style['item-chart']"></canvas>
+          <canvas id="chart-price" :class="$style['item-chart']"></canvas>
         </div>
       </div>
       <List
-        :commodityList="commodityList"
+        :itemList="itemList"
         :openDetails="handleOpenDetails"
         :details="details"
         :convertToRupiah="convertToRupiah"
@@ -45,24 +45,24 @@
 import { gql } from 'apollo-boost';
 import Chart from 'chart.js/auto';
 
-import List from '../components/commodity/list.vue';
-import Incoming from '../components/commodity/incoming.vue';
-import Details from '../components/commodity/details.vue';
-import ApplyLoan from '../components/commodity/applyLoan.vue';
+import List from '../components/item/list.vue';
+import Incoming from '../components/item/incoming.vue';
+import Details from '../components/item/details.vue';
+import ApplyLoan from '../components/item/applyLoan.vue';
 
 export default {
-  name: 'Commodity',
+  name: 'Item',
   components: {
     List, Incoming, Details, ApplyLoan,
   },
   data() {
     return {
-      commodityList: [],
+      itemList: [],
       incomingFormIsOpen: false,
       applyLoanTabIsOpen: false,
       details: null,
       chartStockComponent() {
-        const chartData = [...this.commodityList].slice(0, 4);
+        const chartData = [...this.itemList].slice(0, 4);
 
         const chart = new Chart(document.getElementById('chart-stock'), {
           type: 'bar',
@@ -94,7 +94,7 @@ export default {
         return chart;
       },
       chartPriceComponent() {
-        const chartData = [...this.commodityList].slice(0, 4);
+        const chartData = [...this.itemList].slice(0, 4);
 
         const chart = new Chart(document.getElementById('chart-price'), {
           type: 'bar',
@@ -147,7 +147,7 @@ export default {
       try {
         const request = await this.$apollo.query({
           query: gql`query($userId: String!, $orderBy: String!) {
-            GetAllCommodities(
+            GetAllItems(
               userId: $userId, orderBy: $orderBy
             ) {
               _id name description price stock warehouse category
@@ -160,7 +160,7 @@ export default {
           },
         });
 
-        this.commodityList = request.data.GetAllCommodities;
+        this.itemList = request.data.GetAllItems;
       }
       catch (error0) {
         console.error(error0.message);
@@ -178,13 +178,13 @@ export default {
     this.chartStockComponent();
     this.chartPriceComponent();
 
-    this.details = !this.details ? this.commodityList[0] : this.details;
+    this.details = !this.details ? this.itemList[0] : this.details;
 
-    if (this.commodityList.length === 0) {
+    if (this.itemList.length === 0) {
       this.details = {
         name: 'Undefined',
         description: 'Undefined',
-        price: '',
+        price: '0',
         stock: 'Undefined',
         warehouse: 'Undefined',
         category: ['Undefined'],
@@ -197,18 +197,18 @@ export default {
 </script>
 
 <style module>
-#commodity {
+#item {
   width: 100%;
 }
-#commodity-wrap {
+#item-wrap {
   padding: 20px 0;
   margin: 0 430px 0 240px;
 }
-#commodity-wrap #header {
+#item-wrap #header {
   display: flex;
   margin: 0 0 20px 0;
 }
-#commodity-wrap #header .create-commo-btn {
+#item-wrap #header .create-commo-btn {
   display: flex; align-items: center; gap: 10px;
   background: #fff;
   cursor: pointer;

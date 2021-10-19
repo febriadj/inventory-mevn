@@ -3,7 +3,7 @@
     <div :id="$style['details-wrap']">
       <div :id="$style.top">
         <div :id="$style.header">
-          <h2 :class="$style.title">Commodity Details</h2>
+          <h2 :class="$style.title">Item Details</h2>
         </div>
         <table :id="$style.table">
           <tr><td>Name</td><td :class="$style.item">{{ details.name }}</td></tr>
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: 'CommodityDetails',
+  name: 'ItemDetails',
   props: {
     details: Object,
     handleApplyLoanTab: Function,

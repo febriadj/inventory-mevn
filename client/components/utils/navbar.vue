@@ -5,13 +5,13 @@
         <h3 class="logo">Inventory App</h3>
       </div>
       <div :id="$style.link">
-        <router-link to="/dashboard" :class="$style.links">
+        <router-link to="/" :class="$style.links">
           <i class="bx bx-grid-alt"></i>
           <p :class="$style.paragraf">Dashboard</p>
         </router-link>
-        <router-link to="/commodity" :class="$style.links">
+        <router-link to="/item" :class="$style.links">
           <i class="bx bx-cube-alt"></i>
-          <p :class="$style.paragraf">Commodity</p>
+          <p :class="$style.paragraf">Item</p>
         </router-link>
         <router-link to="/category" :class="$style.links">
           <i class="bx bx-notepad"></i>

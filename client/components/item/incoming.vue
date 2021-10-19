@@ -3,7 +3,7 @@
     <div :id="$style['incoming-wrap']">
       <div :id="$style.header">
         <div :id="$style.top">
-          <h2 :class="$style.title">Create New Commodity</h2>
+          <h2 :class="$style.title">Create New Item</h2>
           <button :class="$style.btn" @click="handleIncomingForm">
             <span class="bx bx-undo" :class="$style.icon"></span>
             <p :class="$style.paragraf">Close Tab</p>
@@ -123,7 +123,7 @@ export default {
               $warehouse: String!
               $category: [String]
             ) {
-            AddCommodity(
+            AddItem(
               userId: $userId
               name: $name
               description: $description
@@ -155,7 +155,7 @@ export default {
         this.fields.warehouse = '';
         this.fields.category = '';
 
-        setTimeout(() => this.$router.go(), 2000);
+        setTimeout(() => this.$router.go(), 500);
       }
       catch (error0) {
         this.notif = error0.message;

@@ -8,7 +8,7 @@
         <td :class="$style.warehouse">Warehouse</td>
         <td :class="$style.action">Action</td>
       </tr>
-      <tr :class="$style['list-value']" v-for="item of commodityList" :key="item._id">
+      <tr :class="$style['list-value']" v-for="item of itemList" :key="item._id">
         <td :class="$style.name" @click="openDetails(item)">
           <p :class="$style.paragraf"
             :style="details._id === item._id ? 'text-decoration: underline' : null"
@@ -39,28 +39,28 @@ import { gql } from 'apollo-boost';
 export default {
   name: 'List',
   props: {
-    commodityList: Array,
+    itemList: Array,
     updateList: Function,
     openDetails: Function,
     details: Object,
     convertToRupiah: Function,
   },
   methods: {
-    async handleDeleteItem(commodityId) {
+    async handleDeleteItem(itemId) {
       try {
         await this.$apollo.mutate({
           mutation: gql`mutation($_id: ID!, $userId: String!) {
-            DeleteCommodity(_id: $_id, userId: $userId) {
+            DeleteItem(_id: $_id, userId: $userId) {
               _id name
             }
           }`,
           variables: {
-            _id: commodityId,
+            _id: itemId,
             userId: this.$store.getters.getUser._id,
           },
         });
 
-        window.location.reload();
+        this.$router.go();
       }
       catch (error0) {
         this.notif = error0.message;

@@ -2,16 +2,16 @@
   <div :id="$style.list">
     <table :id="$style.table">
       <tr :class="$style['list-header']">
-        <td :class="$style.name">Commodity Name</td>
+        <td :class="$style.name">Item Name</td>
         <td :class="$style.customer">Customer</td>
         <td :class="$style.price">Price</td>
         <td :class="$style.quantity">Quantity</td>
       </tr>
-      <tr :class="$style['list-value']" v-for="item of loanList" :key="item._id">
-        <td :class="$style.name"><p :class="$style.paragraf">{{ item.commodityName }}</p></td>
-        <td :class="$style.customer">{{ item.customerName }}</td>
-        <td :class="$style.price">{{ convertToRupiah(item.price) }}</td>
-        <td :class="$style.quantity">{{ item.quantity }}</td>
+      <tr :class="$style['list-value']" v-for="loan of loanList" :key="loan._id">
+        <td :class="$style.name"><p :class="$style.paragraf">{{ loan.itemName }}</p></td>
+        <td :class="$style.customer">{{ loan.customerName }}</td>
+        <td :class="$style.price">{{ convertToRupiah(loan.price) }}</td>
+        <td :class="$style.quantity">{{ loan.quantity }}</td>
       </tr>
     </table>
   </div>
@@ -30,7 +30,7 @@ export default {
 
       for (let i = 0; i < numToStr.length; i += 1) {
         if (i % 3 === 0) {
-          rupiah += `${numToStr.substr(i, 3)}.`;
+          rupiah += `${numToStr.substr(i, 3)},`;
         }
       }
 
@@ -46,6 +46,7 @@ export default {
 }
 #table {
   width: 100%;
+  border-collapse: collapse;
 }
 #table tr td {
   padding: 8px 10px;
