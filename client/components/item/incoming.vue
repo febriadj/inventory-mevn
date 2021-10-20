@@ -170,7 +170,7 @@ export default {
   position: fixed;
   width: 100%; height: 100%;
   display: flex; justify-content: center; align-items: center;
-  background: #352a3a46;
+  background: #171724bb;
   z-index: 9;
 }
 #incoming-wrap {
