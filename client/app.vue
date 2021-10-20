@@ -1,8 +1,8 @@
 <template>
   <!-- use vue fragment -->
   <div>
-    <Navbar />
-    <router-view v-if="loggedIn" />
+    <navbar></navbar>
+    <router-view v-if="everythingIsOke"></router-view>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   components: { Navbar },
   data() {
     return {
-      loggedIn: false,
+      everythingIsOke: false,
     }
   },
   methods: {
@@ -36,15 +36,18 @@ export default {
         });
 
         this.$store.dispatch('counter/getUser', user.data.UserVerify);
-        this.loggedIn = true;
       }
       catch (error0) {
         console.error(error0.message);
       }
     },
+    handleEverythingIsOke() {
+      this.everythingIsOke = true;
+    },
   },
   async mounted() {
     await this.getUserData();
+    this.handleEverythingIsOke();
   },
 }
 </script>
