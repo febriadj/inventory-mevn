@@ -1,5 +1,5 @@
 <template>
-  <div :id="$style.repay">
+  <div :id="$style['single-box']">
     <canvas id="chart-commo"></canvas>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style module>
-#repay {
+#single-box {
   background: #fff;
   padding: 20px;
 }

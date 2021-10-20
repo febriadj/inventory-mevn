@@ -4,14 +4,20 @@
       <tr :class="$style['list-header']">
         <td :class="$style.name">Item Name</td>
         <td :class="$style.customer">Customer</td>
-        <td :class="$style.price">Price</td>
+        <td :class="$style.name">NIK</td>
         <td :class="$style.quantity">Quantity</td>
+        <td :class="$style.price">Price</td>
       </tr>
       <tr :class="$style['list-value']" v-for="loan of loanList" :key="loan._id">
-        <td :class="$style.name"><p :class="$style.paragraf">{{ loan.itemName }}</p></td>
-        <td :class="$style.customer">{{ loan.customerName }}</td>
-        <td :class="$style.price">{{ convertToRupiah(loan.price) }}</td>
+        <td :class="$style.name" @click="handleOpenDetails(loan)">
+          <p :class="$style.paragraf">
+          {{ loan.itemName }}
+          </p>
+        </td>
+        <td :class="$style.customer"><p :class="$style.paragraf">{{ loan.customerName }}</p></td>
+        <td :class="$style.nik">{{ loan.nik }}</td>
         <td :class="$style.quantity">{{ loan.quantity }}</td>
+        <td :class="$style.price">{{ convertToRupiah(loan.price) }}</td>
       </tr>
     </table>
   </div>
@@ -19,23 +25,11 @@
 
 <script>
 export default {
-  name: 'List',
+  name: 'LoanList',
   props: {
     loanList: Array,
-  },
-  methods: {
-    convertToRupiah(numeric) {
-      let rupiah = '';
-      const numToStr = numeric.toString().split('').reverse().join('');
-
-      for (let i = 0; i < numToStr.length; i += 1) {
-        if (i % 3 === 0) {
-          rupiah += `${numToStr.substr(i, 3)},`;
-        }
-      }
-
-      return `Rp${rupiah.split('', rupiah.length - 1).reverse().join('')}`;
-    },
+    handleOpenDetails: Function,
+    convertToRupiah: Function,
   },
 }
 </script>
@@ -51,6 +45,24 @@ export default {
 #table tr td {
   padding: 8px 10px;
   vertical-align: middle;
+}
+tr .name {
+  overflow-x: hidden;
+  max-width: 300px;
+}
+tr .name .paragraf {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+tr .customer .paragraf {
+  overflow-x: hidden;
+  max-width: 250px;
+}
+tr .customer .paragraf {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .list-header {
   text-transform: uppercase;
