@@ -4,14 +4,26 @@ const token = sessionStorage.getItem('token');
 
 const routes = [
   {
-    name: 'Dashboard',
+    name: token ? 'Dashboard' : 'Login',
     path: '/',
     component() {
       return token ? import('../views/dashboard.vue') : import('../views/login.vue');
     },
     meta: {
-      title: 'Inventory - Dashboard',
+      title: `Inventory - ${token ? 'Dashboard' : 'Login'}`,
       requireAuth: false,
+      lockedAtLogin: token === null,
+    },
+    props: true,
+  },
+  {
+    name: 'Register',
+    path: '/register',
+    component: () => import('../views/register.vue'),
+    meta: {
+      title: 'Inventory - Register',
+      requireAuth: false,
+      lockedAtLogin: true,
     },
     props: true,
   },
@@ -22,6 +34,7 @@ const routes = [
     meta: {
       title: 'Inventory - Item',
       requireAuth: true,
+      lockedAtLogin: false,
     },
     props: true,
   },
@@ -32,6 +45,7 @@ const routes = [
     meta: {
       title: 'Inventory - Loan',
       requireAuth: true,
+      lockedAtLogin: false,
     },
     props: true,
   },
@@ -42,6 +56,7 @@ const routes = [
     meta: {
       title: 'Inventory - Opss. 404',
       requireAuth: false,
+      lockedAtLogin: false,
     },
     props: true,
   },
@@ -60,6 +75,13 @@ router.beforeEach((to, from, next) => {
       window.location.href = '/';
     }
   }
+
+  if (to.meta.lockedAtLogin) {
+    if (token) {
+      window.location.href = '/';
+    }
+  }
+
   next();
 });
 
