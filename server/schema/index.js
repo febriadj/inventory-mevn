@@ -6,6 +6,7 @@ const { GetAllLoans } = require('./queries/loan');
 const { AddLoan, RepayLoanPerStock } = require('./mutations/loan');
 const { UserVerify } = require('./queries/user');
 const { UserRegister, UserLogin } = require('./mutations/user');
+const { AddWarehouse } = require('./mutations/warehouse');
 
 const query = new GraphQLObjectType({
   name: 'Query',
@@ -29,6 +30,8 @@ const mutation = new GraphQLObjectType({
     // loan
     AddLoan,
     RepayLoanPerStock,
+    // warehouse
+    AddWarehouse,
   }),
 });
 
