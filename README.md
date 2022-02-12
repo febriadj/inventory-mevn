@@ -9,53 +9,49 @@
 ![jwt](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=JSON%20web%20tokens&logoColor=white)
 ![chartjs](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)
 
-Ini adalah aplikasi Inventory yang dirancang untuk mengelola, mengatur dan mengawasi segala hal mengenai pembelian dan peminjaman barang/komoditas.
+This is an Inventory application that is designed to manage 📋, organize and supervise all things regarding the purchase and borrowing of goods/commodities. 📦📈
 
-Tumpukan teknologi yang saya gunakan untuk membangun aplikasi ini antara lain:
-- Node.js & Express.js
-- Vue.js
-- MongoDB
-- GraphQL & Apollo
-- Webpack
+The technology stack I used on this project includes:
+- [Node.js](https://nodejs.org/en) & [Express.js](https://expressjs.com)
+- [Vue.js](https://vuejs.org)
+- [MongoDB](https://www.mongodb.com)
+- [GraphQL](https://graphql.org) & [Apollo](https://www.apollographql.com)
+- [Webpack](https://webpack.js.org)
 
-# Jalankan Aplikasi
-> Catatan: Untuk menjalankan aplikasi ini anda perlu menginstall Node.js dan @vue/cli di perangkat anda.
+# Getting Started
+> Note: To run this application you need to install Node.js and @vue/cli on your device.
 
-Clone Proyek ini ke Repositori Lokal anda. Lalu Masuk ke folder proyek anda.
 ~~~
 git clone https://github.com/febriadj/inventory-mevn
 
 cd inventory-mevn/ && code .
 ~~~
-
-Install dan Update seluruh Dependencies pada proyek ini.
 ~~~
 npm install && npm update
 ~~~
-Tidak perlu menjalankan `npm update` jika tidak ingin mengupdate seluruh dependecies proyek ini ke versi yang terbaru.
+Install all dependencies on this project.
 
-Jalankan aplikasi dalam lingkungan pengembangan
-~~~js
+~~~
 npm run dev
 ~~~
+Run the app in development mode. then open http://localhost:3000 in the browser.
 
-# Penggunaan
+# Screenshot 📸
 ![sample-app](./documents/images/sample-app.png)
-Ini adalah hasil tangkapan layar yang saya ambil pada halaman `/commodity`. Pada halaman ini pengguna dapat mengelola dan mengawasi persediaan barang/komoditas.
 
-Semua aktifitas pendataan yang dilakukan oleh pengguna hanya dapat dilihat oleh pengguna itu sendiri, artinya setiap akun yang terdaftar pada aplikasi ini memiliki ruangan kerja mereka sendiri.
+# Contributing
+Contributions make the open source community a great place to learn, inspire and create. I really appreciate every contribution you make.
 
-# Kontribusi
-Kontribusi membuat komunitas open source menjadi tempat yang luar biasa untuk belajar, menginspirasi, dan berkreasi. Setiap kontribusi yang anda buat sangat saya hargai.
+If you have any suggestions that would make this even better, please fork this repo and pull request. You can also open an issue on this project and don't forget to give this project a star. Thank you.
 
-Jika anda memiliki saran yang akan membuat ini lebih baik, silakan fork repo ini dan ajukan permintaan tarik. Anda juga dapat membuka issue pada proyek ini dan jangan lupa untuk memberi proyek ini bintang. Terima kasih.
+- Fork this project
+- Create a new branch (git checkout -b branchName)
+- Commit your changes (git commit -m "Add new features")
+- Push to your branch (git push origin branchName)
+- Submit a pull request
 
-- Fork Proyek Ini (`git clone https://github.com/febriadj/inventory-mevn`)
-- Buat Branch Baru (`git checkout -b namaBranch`)
-- Commit Perubahan Anda (`git commit -m "Add new features"`)
-- Push Ke Branch Anda (`git push origin namaBranch`)
-- Ajukan Permintaan Tarik
+# Contact
+LinkedIn: [linkedin.com/in/febri-adji](https://www.linkedin.com/in/febri-adji)
 
-# Kontak
-[![webpack](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:iamfebriadji@gmail.com?subject=From%20&body=Hi%20Febri,%20)
-[![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/febri-adji)
+Phone: +62 851-5670-3982
+Email: <iamfebriadji@gmail.com>
