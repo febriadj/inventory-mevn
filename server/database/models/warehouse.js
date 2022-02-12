@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 const WarehouseModel = model('warehouses', new Schema({
+  userId: {
+    type: String, required: true,
+  },
   name: {
     type: String, unique: true, required: true,
   },
